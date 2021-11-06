@@ -1,0 +1,91 @@
+.login-main {
+  height: 100vh;
+  display: grid;
+  place-items: center;
+  background: radial-gradient(#5a2da2, #fff);
+}
+
+.login-section {
+  max-width: 500px;
+  width: 100%;
+}
+
+.loginForm {
+  background: linear-gradient(#fff, #5a2da2);
+  padding: 2em 1em;
+  border-radius: 5px;
+  box-shadow: 0 8px 6px -6px #427dd0;
+
+  label {
+    color: #fff;
+    margin: 0 3% 0.25em;
+    display: block;
+  }
+
+  input {
+    width: 94%;
+    padding: 0.5em 0.25em;
+    margin: 0 3% 1em;
+    font-size: 1.2em;
+    border: 2px solid #e5e5e5;
+    outline: none;
+    transition: all, 0.25s;
+    border-radius: 5px;
+    box-shadow: 0 8px 6px -6px black;
+  }
+
+  input:focus {
+    border: 2px solid #427dd0;
+  }
+
+  button {
+    width: 94%;
+    margin: 2em 3% 0;
+    border: none;
+    background: #76c0ca;
+    padding: 1em 0;
+    font-size: 1.25em;
+    clear: both;
+    color: #fff;
+    border-radius: 5px;
+    outline: none;
+    transition: all, 0.25s;
+    cursor: pointer;
+    box-shadow: 0 8px 6px -6px #76c0ca;
+  }
+
+  button:focus,
+  button:hover {
+    background: #a9dce3;
+  }
+}
+
+.back-to-courier {
+  width: fit-content;
+  margin-left: 20px;
+  margin-top: 10px;
+  text-decoration: underline;
+  color: rgb(66, 66, 66);
+}
+
+.back-to-courier:hover {
+  cursor: pointer;
+  color: rgb(133, 131, 131);
+}
+
+.Errormessage {
+  font-size: 12px;
+  color: red;
+}
+
+.Com-Title {
+  text-align: center;
+}
+
+.Com-Title h2 {
+  font-family: "Times New Roman", Times, serif;
+  font-weight: bold;
+  font-style: italic;
+  color: #fff;
+  margin-bottom: 1.5rem;
+}
