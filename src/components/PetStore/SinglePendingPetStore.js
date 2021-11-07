@@ -4,7 +4,12 @@ import { Modal, Button, Row, Col } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { cleanSingleUser } from '../../store/actions/adminUserAction';
 import dataservice from '../../service/dataservice';
-import { PENDING_PET_STORE } from '../../constants'
+import { PENDING_PET_STORE,
+    APPROVE_TEXT,
+    DECLINE_TEXT,
+    GOOD_DAY,
+    THANK_YOU
+} from '../../constants'
 import { toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 
@@ -20,6 +25,10 @@ function SinglePendingPetStore(props) {
     const handleCloseDecline = () => setShowDecline(false);
     const handleShowDecline = () => setShowDecline(true);
 
+    let recipient = dataservice.validPhoneNo (String (user.phoneNo));
+    let approveText = GOOD_DAY + user.name + APPROVE_TEXT + user.userType + THANK_YOU;
+    let declineText = GOOD_DAY + user.name + DECLINE_TEXT + user.userType + THANK_YOU;
+
     const backClick = () => {
         cleanSingleUser();
         history.push('/PetStore');
@@ -27,6 +36,11 @@ function SinglePendingPetStore(props) {
 
     const handleApprove = () => {
         saveUser();
+
+        let textmessage = approveText;
+        fetch(`http://127.0.0.1:4000/send-text?recipient=${recipient}&textmessage=${textmessage}&email=${user.email}`)
+            .catch(err => console.error(err))
+
         toast.success('Successfully Approved ' + user.name + ' as a ' + user.userType);
         cleanSingleUser();
         history.push('/PetStore');
@@ -67,6 +81,12 @@ function SinglePendingPetStore(props) {
 
     const declineUser = () =>{
         deleteUser();
+
+        let textmessage = declineText;
+        fetch(`http://127.0.0.1:4000/send-text?recipient=${recipient}&textmessage=${textmessage}&email=${user.email}`)
+        .catch(err => console.error(err))
+
+
         toast.error('You Decline ' + user.name + ' as a ' + user.userType);
         handleCloseDecline();
         cleanSingleUser();

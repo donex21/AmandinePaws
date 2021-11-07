@@ -130,6 +130,21 @@ const getApprovedUserCert = (uid) => {
     return firebase.ref( CERT + SLASH + uid );
 }
 
+const validPhoneNo = (phoneNo) =>{
+    let phCode = phoneNo.substring(0, 3);
+    if (phCode === "+63" && phoneNo.length  === 13)
+    {
+        return phoneNo.slice(3, phoneNo.length);
+    }
+    else if ( phoneNo.length === 11 && phoneNo.charAt(0) === "0" )
+    {
+        return phoneNo.slice(1, phoneNo.length);
+    }
+    else{
+        return "";
+    }
+}
+
 export default {
     logout,
     auth,
@@ -139,5 +154,6 @@ export default {
     addUserDetails,
     addInAllUsersTBL,
     addUserCert,
-    getApprovedUserCert
+    getApprovedUserCert,
+    validPhoneNo
 };

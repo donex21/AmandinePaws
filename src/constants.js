@@ -26,6 +26,13 @@ export const CERTIFICATE = "/Certificate/images";
 export const SLASH = "/"
 export const CERT = "/Certificate";
 
+// Approve Text Message
+export const APPROVE_TEXT = ". \n\n This is Amandine Paws. \n\n We would like to inform you that your application has been approved as a ";
+// Decline Text Message
+export const DECLINE_TEXT = ". \n\n This is Amandine Paws. \n\n We would like to inform you that due to lack of evidence your application has been declined  as a ";             
+export const GOOD_DAY = " Good Day ";
+export const THANK_YOU =  ". \n\n Thank you and God Speed.";
+
 
 // <<<<<<<<<<<<----React Table Columns---->>>>>>>>>>>>>>
 // Veterinarian and Pet Owner Header Column

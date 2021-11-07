@@ -3,7 +3,12 @@ import { useHistory } from 'react-router-dom';
 import { Modal, Button, Row, Col } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { cleanSingleUser } from '../../store/actions/adminUserAction';
-import { PENDING_VET } from '../../constants';
+import { PENDING_VET,
+    APPROVE_TEXT,
+    DECLINE_TEXT,
+    GOOD_DAY,
+    THANK_YOU
+} from '../../constants';
 import dataservice from '../../service/dataservice';
 import { toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
@@ -28,6 +33,10 @@ function SinglePendingVet(props) {
     const handleCloseDecline = () => setShowDecline(false);
     const handleShowDecline = () => setShowDecline(true);
 
+    let recipient = dataservice.validPhoneNo (String (user.phoneNo));
+    let approveText = GOOD_DAY + user.firstname + ' '+ user.lastname + APPROVE_TEXT + user.userType + THANK_YOU;
+    let declineText = GOOD_DAY + user.firstname + ' '+ user.lastname + DECLINE_TEXT + user.userType + THANK_YOU;
+
     const backClick = () => {
         cleanSingleUser();
         history.push('/Veterinarian');
@@ -35,6 +44,11 @@ function SinglePendingVet(props) {
 
     const handleApprove = () => {
         saveUser();
+
+        let textmessage = approveText;
+        fetch(`http://127.0.0.1:4000/send-text?recipient=${recipient}&textmessage=${textmessage}&email=${user.email}`)
+            .catch(err => console.error(err))
+
         toast.success('Successfully Approved ' + user.firstname + ' ' +  user.lastname + ' as a ' + user.userType);
         cleanSingleUser();
         history.push('/Veterinarian');
@@ -101,6 +115,11 @@ function SinglePendingVet(props) {
 
     const declineUser = () =>{
         deleteUser();
+
+        let textmessage = declineText;
+        fetch(`http://127.0.0.1:4000/send-text?recipient=${recipient}&textmessage=${textmessage}&email=${user.email}`)
+        .catch(err => console.error(err))
+        
         toast.error('You Decline ' + user.firstname + ' ' +  user.lastname + ' as a ' + user.userType);
         handleCloseDecline();
         cleanSingleUser();
